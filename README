@@ -1,0 +1,87 @@
+Cameron Atkins
+CompSci 4280
+Project 0
+
+Invoking the program:
+
+After compiling the program using the make command, the program P0 can be invoked in one of 3 ways.
+Below are the invocation methods and problems encountered with the program.
+
+1. ./P0 
+This invocation method is supposed to read in data from the keyboard until the simulated EOF. However
+after typing ^D, program times out.
+
+2. ./P0 < someFile
+This invocation opens the file and program executes successfully.
+
+3. ./P0 someFile
+The program executes but is unable to open the file.
+
+
+
+
+Program Specifications:
+Write a program to build a tree and print it using three different traversals. The program will be invoked as
+
+Invocation
+P0 [file]
+
+where file is an optional argument. If the file argument is not given, the program reads data from the keyboard as a device.
+
+If the argument is given, the program reads data file file.f23. (note that file is any name and the extension is implicit).
+Programs not properly implementing invocation can get max 50%.
+
+Invocation illustrations:
+
+P0 // read from the keyboard until simulated EOF
+P0 < somefile // same as above except redirecting from somefile instead of keyboard, this tests keyboard input, the entire filename must be given with the extension and this is the same as above except the shell submit the file to the program
+P0 somefile  // read from somefile.f23
+
+Requirements
+Assume you do not know the size of the input file.
+Assume the input data is all strings (printable ASCII) separated with standard WS separators (space, tab, new line).
+If the input file is not readable for whatever reason, or command line arguments are not correct, the program must abort with an appropriate message.
+
+The program will read the data left to right and put them into a tree, which is a binary search tree (BST). The data is all strings made up of letters and digits only (you may assume only good data, +10 for validation and error). The BST is constructed with respect length of a string - strings of the same length fall into the same node, those shorter end up in the left subtree, etc.
+
+Tree is never balanced nor restructured other than growing new nodes as needed.
+
+A node should know the digit it collects the number for, and all the numbers falling into the node except that duplicates are not retained.
+
+The program will subsequently output 3 files corresponding to 3 traversals, named file.preorder, file.inorder and file.postorder. Note that file is the base name of the input file if given, and it is out.preorder, etc.  if that is not not given.
+
+Treversals
+            preorder
+            inorder
+            postoder
+
+Printing in traversal
+
+a node will print starting with indentation of 2x depth (root is at depth 0) then the node's length (length of the strings) followed by character ':' and space followed by the list of numbers from the node set separated by spaces (a set, no repetitions and no specific order)
+
+Structural Requirements       
+The main function should be in the file P0.c (in C, P0.cpp in C++, other languages adjust this as necessary) with any helpers helping it processing the argument as static if functions/global data.  Then you should have functions
+       buildTree()
+        printInorder()
+        printPreorder()
+        printPostorder()
+
+(signatures up to you) implemented  in the same file tree.c/tree.cpp with tree.h as needed. If you have type definition for the node, it should be in a separate header file node.h. 
+
+Traversals taken from the 3130 textbook:
+
+Preorder:
+
+    process root
+    process children left to right
+
+Inorder:
+
+    process left child
+    process root
+    proccess right child
+
+Postorder:
+
+    process children left to right
+    process root
